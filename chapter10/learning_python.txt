@@ -1,0 +1,15 @@
+In Python you can print messages to the screen using the print() function.
+In Python you can store information in variables.
+In Python you can work with strings, integers, floats, and Boolean values.
+In Python you can perform mathematical calculations using arithmetic operators.
+In Python you can use comments to explain your code.
+In Python you can make decisions using if, elif, and else statements.
+In Python you can repeat actions using for and while loops.
+In Python you can create and manipulate lists.
+In Python you can organize data using dictionaries.
+In Python you can work with tuples when data should not change.
+In Python you can get input from users using the input() function.
+In Python you can write programs that respond differently based on user input.
+In Python you can define reusable functions using the def keyword.
+In Python you can pass information to functions through parameters and arguments.
+In Python you can break large programs into smaller, organized, and reusable pieces using functions.

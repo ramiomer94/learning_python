@@ -17,8 +17,8 @@ print(contents)
 # You can use the splitlines() method to turn a long string into a set of
 # lines, and then use a for loop to examine each line from a file, one at a
 #  time:
-lines = path.read_text().splitlines()
-for line in lines :
+
+for line in path.read_text().splitlines() :
     print(line)
 
 

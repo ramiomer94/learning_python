@@ -14,9 +14,13 @@ class AlienInvasion:
         # the pygame.init() function initializes the background settings that
         # Pygame needs to work properly 
         pygame.init()
+
         # create an instance of the class Clock, from the pygame.time module. 
         self.clock = pygame.time.Clock()
-        self.settings = Settings()
+
+        # create an instance of the Settings class that is assigned to settings
+        # the setting instance stores screen settings and ship settings
+        self.settings = Settings() 
         
         # we call pygame.display.set_mode() to create a display window 2,
         #  on which we’ll draw all the game’s graphical elements.
@@ -24,14 +28,28 @@ class AlienInvasion:
         # The argument (1200, 800) is a tuple that defines the dimensions
         # of the game window, which will be 1,200 pixels wide by 800 pixels
         #  high. (You can adjust these values depending on your display size.)
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+        # self.screen = pygame.display.set_mode(
+        #    (self.settings.screen_width, self.settings.screen_height))
+
+        # To run the game in fullscreen mode, make the following changes in
+        # __init__():
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height 
+
+        # If you like how the game looks or behaves in fullscreen mode, keep
+        # these settings. If you liked the game better in its own window, you
+        # can revert back to the original approach where we set a specific 
+        # screen size for the game.
+
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
 
 
+
+
     # The game is controlled by the run_game() method. This method contains 
-    # a while loop 3 that runs continually. The while loop contains an event
+    # a while loop that runs continually. The while loop contains an event
     # loop and code that manages screen updates.
     def run_game(self) :
         """ Start the main loop for the game."""
@@ -71,16 +89,26 @@ class AlienInvasion:
             if event.type == pygame.QUIT :
                 sys.exit()
             elif event.type == pygame.KEYDOWN :
-                if event.key == pygame.K_RIGHT :
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT :
-                    self.ship.moving_left = True
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP :
-                if event.key == pygame.K_RIGHT :
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT :
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
 
+    def _check_keydown_events(self, event) :
+        """Respond to key presses."""
+        if event.key == pygame.K_RIGHT :
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT :
+            self.ship.moving_left = True
+        elif event.key == pygame.K_q :
+            sys.exit()
+    
+    def _check_keyup_events(self, event) :
+        """Respond to key releases."""
+        if event.key == pygame.K_RIGHT :
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT :
+            self.ship.moving_left = False
+            
     
     def _update_screen(self) :
         """Update images on the screen, and flip to the new screen."""
